@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "formidable": "^3.5.1",
+    "nodemailer": "^6.9.8",
+    "nodemon": "^3.0.3"
+  }
+}

@@ -1,6 +1,9 @@
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
+const events = require("events");
+
+const eventsEmitter = new events.EventEmitter();
 
 /**
 http.createServer(function (peticion, respuesta) {
@@ -16,11 +19,23 @@ server.on("request", function (peticion, respuesta) {
 	let pathname = urlCompleta.pathname;
 	let fichero = "";
 
+	let playa = function playa() {
+		console.log("Nos vamos a la playa");
+	};
+	let montana = function montana() {
+		console.log("Nos vamos a la montaña");
+	};
+
+	eventsEmitter.on("montaña", montana);
+	eventsEmitter.on("playa", playa);
+
 	if (pathname == "/verano") {
 		fichero = "./verano.html";
+		eventsEmitter.emit("playa");
 	}
 	if (pathname == "/invierno") {
 		fichero = "./invierno.html";
+		eventsEmitter.emit("montaña");
 	}
 	if (fichero != "") {
 		fs.readFile(fichero, function (err, datos) {
